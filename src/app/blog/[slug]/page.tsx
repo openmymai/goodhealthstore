@@ -14,7 +14,8 @@ import type { Post } from '@/types/post'; // Adjust path
 
 // --- Props Type ---
 interface PostPageProps {
-  params: { slug: string }; // Params are resolved in Server Components
+  params: Promise<{ slug: string }>; // Params are resolved in Server Components
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>; // Keep searchParams if needed
 }
 
 // --- generateStaticParams ---
