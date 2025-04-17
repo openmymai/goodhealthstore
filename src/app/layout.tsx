@@ -1,13 +1,29 @@
-import Footer from "@/app/_components/footer";
-import { CMS_NAME, HOME_OG_IMAGE_URL } from "@/lib/constants";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import cn from "classnames";
-import { ThemeSwitcher } from "./_components/theme-switcher";
+import SvgDefinitions from '@/app/_components/SvgDefinitions';
+import ClientLayout from '@/app/_components/ClientLayout';
+import Header from '@/app/_components/header';
+import Footer from '@/app/_components/footer';
+import { CMS_NAME, HOME_OG_IMAGE_URL } from '@/lib/constants';
+import type { Metadata } from 'next';
+import { Noto_Sans_Thai, Prompt } from 'next/font/google';
+import { StoreProvider } from './context/StoreContext';
 
-import "./globals.css";
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"] });
+// Configure Noto (สำหรับ body)
+const noto = Noto_Sans_Thai({
+  subsets: ['thai', 'latin'], // Include subsets needed
+  weight: ['400', '700'], // Include weights needed (400=regular, 700=bold)
+  variable: '--font-noto-thai', // Define CSS Variable name
+  display: 'swap', // Font display strategy
+});
+
+// Configure Prompt (สำหรับ heading)
+const prompt = Prompt({
+  subsets: ['thai', 'latin'],
+  weight: ['400', '700'], // Include weights needed
+  variable: '--font-prompt', // Define CSS Variable name
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: `Next.js Blog Example with ${CMS_NAME}`,
@@ -23,46 +39,70 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang='en'
+      className={`${noto.variable} ${prompt.variable}`}
+    >
       <head>
         <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/favicon/apple-touch-icon.png"
+          rel='apple-touch-icon'
+          sizes='180x180'
+          href='/favicon/apple-touch-icon.png'
         />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon/favicon-32x32.png"
+          rel='icon'
+          type='image/png'
+          sizes='32x32'
+          href='/favicon/favicon-32x32.png'
         />
         <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon/favicon-16x16.png"
+          rel='icon'
+          type='image/png'
+          sizes='16x16'
+          href='/favicon/favicon-16x16.png'
         />
-        <link rel="manifest" href="/favicon/site.webmanifest" />
         <link
-          rel="mask-icon"
-          href="/favicon/safari-pinned-tab.svg"
-          color="#000000"
+          rel='manifest'
+          href='/favicon/site.webmanifest'
         />
-        <link rel="shortcut icon" href="/favicon/favicon.ico" />
-        <meta name="msapplication-TileColor" content="#000000" />
+        <link
+          rel='mask-icon'
+          href='/favicon/safari-pinned-tab.svg'
+          color='#000000'
+        />
+        <link
+          rel='shortcut icon'
+          href='/favicon/favicon.ico'
+        />
         <meta
-          name="msapplication-config"
-          content="/favicon/browserconfig.xml"
+          name='msapplication-TileColor'
+          content='#000000'
         />
-        <meta name="theme-color" content="#000" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
+        <meta
+          name='msapplication-config'
+          content='/favicon/browserconfig.xml'
+        />
+        <meta
+          name='theme-color'
+          content='#000'
+        />
+        <link
+          rel='alternate'
+          type='application/rss+xml'
+          href='/feed.xml'
+        />
       </head>
-      <body
-        className={cn(inter.className, "dark:bg-slate-900 dark:text-slate-400")}
-      >
-        <ThemeSwitcher />
-        <div className="min-h-screen">{children}</div>
-        <Footer />
+      <body>
+        <SvgDefinitions />
+        <StoreProvider>
+          <ClientLayout>
+            <Header />
+            <main>
+              <div className='min-h-screen'>{children}</div>
+            </main>
+            <Footer />
+          </ClientLayout>
+        </StoreProvider>
       </body>
     </html>
   );

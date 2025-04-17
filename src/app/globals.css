@@ -1,3 +1,243 @@
+/* Import Swiper styles */
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination'; /* Add if you use pagination */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  /* Define font variables for layout.tsx */
+  --font-open-sans: 'Open Sans', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+}
+
+/* Apply base body styles */
+body {
+  color: theme('colors.body');
+  background-color: white; /* Or your desired background */
+  font-family: theme('fontFamily.sans');
+  line-height: 2;
+  letter-spacing: 0.03em;
+}
+
+/* Apply heading font */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: theme('fontFamily.heading');
+  color: theme('colors.dark.DEFAULT');
+  font-weight: 700;
+}
+
+/* Link styles */
+a {
+  color: theme('colors.dark.DEFAULT');
+  text-decoration: none;
+}
+a:hover {
+  color: theme('colors.dark.hover');
+}
+
+/* Custom CSS for things Tailwind doesn't handle easily */
+
+/* Preloader styles (simplified example) */
+.preloader-wrapper {
+  position: fixed;
+  inset: 0;
+  background-color: white;
+  z-index: 50; /* Ensure it's above content */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.preloader {
+  /* Add your spinner animation here */
+  border: 4px solid theme('colors.primary.DEFAULT');
+  border-left-color: transparent;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Banner Blocks Grid Layout (Example using CSS Grid) */
+.banner-blocks {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(2, minmax(0, auto)); /* Adjust row height */
+  gap: 2rem; /* Corresponds to gap-8 in Tailwind */
+}
+.block-1 {
+  grid-area: 1 / 1 / 3 / 8;
+}
+.block-2 {
+  grid-area: 1 / 8 / 2 / 13;
+}
+.block-3 {
+  grid-area: 2 / 8 / 3 / 13;
+}
+
+@media screen and (max-width: 1140px) {
+  .banner-blocks {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, minmax(0, auto)); /* Adjust for 3 rows */
+    gap: 1.5rem; /* Corresponds to gap-6 */
+  }
+  .block-1 {
+    grid-area: 1 / 1 / 2 / 2;
+    min-height: 300px;
+  } /* Example min-height */
+  .block-2 {
+    grid-area: 2 / 1 / 3 / 2;
+    min-height: 200px;
+  }
+  .block-3 {
+    grid-area: 3 / 1 / 4 / 2;
+    min-height: 200px;
+  }
+}
+
+/* Product Item Hover Effect */
+.product-item .button-area {
+  display: none;
+  position: absolute;
+  text-align: center;
+  background: #fff;
+  width: 100%;
+  left: 0;
+  bottom: -55px; /* Adjust as needed based on button area height */
+  z-index: 10;
+  box-shadow: theme('boxShadow.ch');
+  padding: 1rem; /* p-4 */
+  padding-top: 0; /* pt-0 */
+  border-bottom-left-radius: theme(
+    'borderRadius.2xl'
+  ); /* Match product item rounding */
+  border-bottom-right-radius: theme('borderRadius.2xl');
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.product-item:hover .button-area {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-item {
+  transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+  position: relative; /* Needed for absolute positioning of button-area */
+  padding-bottom: 60px; /* Add space for the hover button area */
+  overflow: hidden; /* Hide the button area initially */
+}
+
+.product-item:hover {
+  box-shadow: theme('boxShadow.ch');
+  z-index: 5; /* Bring to front on hover */
+  overflow: visible; /* Show the button area on hover */
+}
+
+/* Style for the quantity input number spinners (optional) */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+/* Dashed border for Offcanvas Menu */
+.border-dashed {
+  border-bottom: 1px dashed theme('colors.border-dashed');
+}
+
+/* Custom btn-link underline effect */
+.btn-link {
+  position: relative;
+  display: inline-block;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: bold; /* font-bold */
+  font-family: theme('fontFamily.sans');
+  letter-spacing: 0.0875rem; /* tracking-wider approx */
+  text-transform: uppercase; /* uppercase */
+  text-decoration: none;
+  padding-bottom: 2px; /* Space for the underline */
+}
+
+.btn-link::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: theme('colors.dark.DEFAULT');
+  transition: width 0.3s ease-out;
+}
+
+.btn-link.text-white::after,
+.btn-link.text-light::after {
+  background-color: theme('colors.white'); /* Or light gray */
+}
+
+.btn-link:hover::after {
+  width: 100%;
+}
+
+/* Swiper button base styles */
+.swiper-button-base {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: theme('colors.warning.subtle'); /* btn-warning bg */
+  color: theme('colors.body'); /* btn-warning text */
+  border-radius: theme('borderRadius.lg'); /* rounded-lg */
+  transition: background-color 0.2s ease-out, color 0.2s ease-out;
+  cursor: pointer;
+}
+.swiper-button-base:hover {
+  background-color: theme('colors.primary.DEFAULT');
+  color: white;
+}
+.swiper-button-disabled {
+  background-color: theme('colors.gray.200');
+  color: theme('colors.gray.400');
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.swiper-button-base:disabled {
+  /* For actual disabled state */
+  background-color: theme('colors.gray.200');
+  color: theme('colors.gray.400');
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Zoom effect for images */
+.image-holder {
+  overflow: hidden;
+  border-radius: inherit; /* Inherit parent's border radius if any */
+}
+.zoom-effect img {
+  transition: transform 0.5s ease;
+}
+.zoom-effect:hover img {
+  transform: scale(1.1);
+}
