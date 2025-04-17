@@ -30,14 +30,22 @@ export async function getPostData(slug: string): Promise<Post> {
     const contentHtml = await markdownToHtml(content);
 
     // ตรวจสอบ properties ที่จำเป็นจาก frontmatter
-    if (!data.title || !data.imageUrl || !data.excerpt || !data.author || !data.publishedDate || !data.category) {
-        throw new Error(`Missing required frontmatter fields in ${realSlug}.md`);
+    if (
+      !data.title ||
+      !data.imageUrl ||
+      !data.excerpt ||
+      !data.author ||
+      !data.publishedDate ||
+      !data.category
+    ) {
+      throw new Error(`Missing required frontmatter fields in ${realSlug}.md`);
     }
 
     // รวม data จาก frontmatter และ contentHtml
     return {
       slug: realSlug, // ใช้ชื่อไฟล์เป็น slug (หรืออ่านจาก frontmatter ถ้าต้องการ)
-      ...(data as { // Cast data ให้มี type ที่คาดหวัง
+      ...(data as {
+        // Cast data ให้มี type ที่คาดหวัง
         title: string;
         imageUrl: string;
         excerpt: string;
@@ -64,24 +72,28 @@ export function getAllPostSlugs(): { slug: string }[] {
   try {
     const fileNames = fs.readdirSync(postsDirectory);
     return fileNames
-      .filter(fileName => fileName.endsWith('.md')) // เอาเฉพาะไฟล์ .md
-      .map(fileName => ({
+      .filter((fileName) => fileName.endsWith('.md')) // เอาเฉพาะไฟล์ .md
+      .map((fileName) => ({
         slug: fileName.replace(/\.md$/, ''), // เอา .md ออก
       }));
   } catch (error) {
-    console.error("Error reading post directory:", error);
+    console.error('Error reading post directory:', error);
     return []; // Return empty array on error
   }
 }
 
-
 // --- Function to get all posts sorted by date ---
 export async function getAllPostsSorted(): Promise<Post[]> {
   const slugs = getAllPostSlugs();
-  const allPostsData = await Promise.all(slugs.map(({ slug }) => getPostData(slug)));
+  const allPostsData = await Promise.all(
+    slugs.map(({ slug }) => getPostData(slug))
+  );
 
   // Sort posts by date in descending order (newest first)
   return allPostsData.sort((post1, post2) => {
-    return new Date(post2.publishedDate).getTime() - new Date(post1.publishedDate).getTime();
+    return (
+      new Date(post2.publishedDate).getTime() -
+      new Date(post1.publishedDate).getTime()
+    );
   });
 }

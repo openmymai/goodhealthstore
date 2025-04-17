@@ -11,7 +11,7 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
-import type { Product, CartItem, WishlistItem } from '@/interfaces/product'; // Adjust path
+import type { Product, CartItem, WishlistItem } from '@/types/product'; // Adjust path
 
 // --- LocalStorage Keys ---
 const CART_STORAGE_KEY = 'organicStoreCart';

@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/app/context/StoreContext'; // Import useStore
-import type { Product } from '@/interfaces/product'; // Import Product type
+import type { Product } from '@/types/product'; // Import Product type
 // Icon imports are removed as we use <use>
 
 interface ProductCardProps {

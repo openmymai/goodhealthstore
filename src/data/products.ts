@@ -1,4 +1,4 @@
-import type { Product } from '@/interfaces/product'; // ปรับ path ตามโครงสร้างของคุณ
+import type { Product } from '@/types/product'; // ปรับ path ตามโครงสร้างของคุณ
 
 const products: Product[] = [
   {
