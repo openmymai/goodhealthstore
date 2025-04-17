@@ -180,14 +180,6 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
                       href='#'
                       className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
                     >
-                      Single Product
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='#'
-                      className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
-                    >
                       Cart
                     </Link>
                   </li>
@@ -205,14 +197,6 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
                       className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
                     >
                       Blog
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='#'
-                      className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
-                    >
-                      Single Post
                     </Link>
                   </li>
                   <li>
@@ -245,14 +229,6 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
                       className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
                     >
                       My Account
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href='#'
-                      className='dropdown-item block px-4 py-2 text-sm text-dark hover:bg-primary hover:text-white rounded'
-                    >
-                      404 Error
                     </Link>
                   </li>
                 </ul>
