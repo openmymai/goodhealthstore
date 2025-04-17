@@ -6,6 +6,11 @@ const nextConfig = {
   output: 'standalone',
   // ... การตั้งค่าอื่นๆ ของคุณ (ถ้ามี) เช่น reactStrictMode, images, etc.
   reactStrictMode: true,
+  experimental: {
+    staleTimes: {
+      dynamic: 30,
+    },
+  },
 };
 
 export default nextConfig;

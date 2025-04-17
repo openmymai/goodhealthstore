@@ -1,95 +1,81 @@
 // app/category/[categorySlug]/page.tsx
-import React from 'react';
+// Keep as Server Component (NO 'use client')
+
+import React from 'react'; // Import React
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Metadata, ResolvingMetadata } from 'next';
 
-// Import data fetching functions and components
-import { getAllProducts, getProductsByCategory } from '@/data/products'; // Adjust path if needed
-import ProductCard from '@/app/_components/ProductCard'; // Adjust path if needed
-import type { Product } from '@/interfaces/product'; // Adjust path if needed
+import { getAllProducts, getProductsByCategory } from '@/data/products';
+import ProductCard from '@/app/_components/ProductCard';
+import type { Product } from '@/interfaces/product';
 
-// --- Props Type ---
-type Props = {
-  params: { categorySlug: string };
-};
+// --- Define a more specific type for Page Props ---
+type CategoryPageProps = {
+  params: Promise<{ categorySlug: string }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }> // Keep searchParams if needed
+}
 
-// --- generateStaticParams (Optional but Recommended) ---
+// --- generateStaticParams (Keep as is) ---
 export async function generateStaticParams() {
   const products = getAllProducts();
-  // Get unique category slugs
   const categories = [...new Set(products.map((product) => product.category))];
-
   return categories.map((categorySlug) => ({
     categorySlug: categorySlug,
   }));
 }
 
 // --- generateMetadata ---
-// Helper function to format category slug to title (basic example)
 const formatCategoryTitle = (slug: string): string => {
-  return slug
-    .split('-')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' & '); // Replace hyphen with ' & '
+  return slug.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' & ');
 };
 
+
+// generateMetadata receives resolved params, so direct access is fine here
 export async function generateMetadata(
-  { params }: Props,
+  { params, searchParams }: CategoryPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const categorySlug = params.categorySlug;
-  // You might want to validate if the category actually exists
+  const { categorySlug } = await params; // Direct access is fine
   const categoryTitle = formatCategoryTitle(categorySlug);
-
+  // Add validation if needed
   return {
     title: `${categoryTitle} | Organic Store`,
     description: `Browse products in the ${categoryTitle} category.`,
   };
 }
 
-// --- Page Component ---
-export default function CategoryPage({ params }: Props) {
-  const categorySlug = params.categorySlug;
-  const productsInCategory = getProductsByCategory(categorySlug);
 
-  // Optional: Handle case where category exists but has no products
-  // if (productsInCategory.length === 0) {
-  //   // You could show a "No products found" message instead of 404
-  //   // Or check if the category slug itself is valid based on a predefined list
-  //   // For now, we assume if products are empty, the category might be invalid or just empty
-  //   // notFound(); // Uncomment this if an empty category should be a 404
-  // }
+// --- Page Component (Server Component) ---
+// Use React.use to unwrap the params promise
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  // const { categorySlug } = await params; // Access slug directly
+  const resolvedParams = await params;
+  const categorySlug = resolvedParams.categorySlug;
+
+  // --- Data Fetching (Happens on Server at build/request time) ---
+  const productsInCategory = getProductsByCategory(categorySlug);
+  // --------------------------------------------------------------
 
   const categoryTitle = formatCategoryTitle(categorySlug);
 
   return (
-    <div className='container mx-auto px-4 lg:px-8 py-10 md:py-16'>
-      {/* Page Title */}
-      <h1 className='text-3xl md:text-4xl font-bold text-dark mb-8 border-b border-border-color pb-4'>
+    <div className="container mx-auto px-4 lg:px-8 py-10 md:py-16">
+      <h1 className="text-3xl md:text-4xl font-bold text-dark mb-8 border-b border-border-color pb-4">
         {categoryTitle}
       </h1>
 
-      {/* Product Grid */}
       {productsInCategory.length > 0 ? (
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6'>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-6">
           {productsInCategory.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
+            // ProductCard is likely 'use client', which is fine to render from Server Component
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
-        // Message when no products are found in the category
-        <div className='text-center py-10'>
-          <p className='text-lg text-body'>
-            No products found in this category.
-          </p>
-          <Link
-            href='/'
-            className='mt-4 inline-block text-primary hover:underline'
-          >
+        <div className="text-center py-10">
+          <p className="text-lg text-body">No products found in this category.</p>
+          <Link href="/" className="mt-4 inline-block text-primary hover:underline">
             ← Back to Shop
           </Link>
         </div>
