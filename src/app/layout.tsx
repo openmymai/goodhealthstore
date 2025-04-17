@@ -2,7 +2,6 @@ import SvgDefinitions from '@/app/_components/SvgDefinitions';
 import ClientLayout from '@/app/_components/ClientLayout';
 import Header from '@/app/_components/header';
 import Footer from '@/app/_components/footer';
-import { CMS_NAME, HOME_OG_IMAGE_URL } from '@/lib/constants';
 import type { Metadata } from 'next';
 import { Noto_Sans_Thai, Prompt } from 'next/font/google';
 import { StoreProvider } from './context/StoreContext';
@@ -26,11 +25,9 @@ const prompt = Prompt({
 });
 
 export const metadata: Metadata = {
-  title: `Next.js Blog Example with ${CMS_NAME}`,
-  description: `A statically generated blog example using Next.js and ${CMS_NAME}.`,
-  openGraph: {
-    images: [HOME_OG_IMAGE_URL],
-  },
+  title: 'บทความสุขภาพ อาหารออร์แกนิก เคล็ดลับดีๆ | Good Health Store Blog',
+  description:
+    'อ่านบทความล่าสุดเกี่ยวกับสุขภาพ โภชนาการ การออกกำลังกาย ไลฟ์สไตล์ออร์แกนิก และเคล็ดลับดูแลตัวเองง่ายๆ จาก Good Health Store',
 };
 
 export default function RootLayout({
