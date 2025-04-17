@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Link>
       </figure>
       <div className='flex flex-col text-center px-4 pb-4'>
-        <h3 className='text-base font-normal text-dark mb-2 h-10 line-clamp-2'>
+        <h3 className='text-base font-normal text-dark mb-2 h-10 v-10 line-clamp-2'>
           <Link
             href={productUrl}
             className='hover:text-primary transition-colors'

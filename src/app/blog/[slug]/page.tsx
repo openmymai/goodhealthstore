@@ -33,10 +33,35 @@ export async function generateMetadata(
   try {
     const post = await getPostData(slug); // Fetch post data for metadata
     return {
-      title: post.metaTitle || `${post.title} | Organic Store`,
+      title: post.metaTitle || `${post.title} | Good Health Store`,
       description: post.metaDescription || post.excerpt,
-      // Add other metadata like openGraph, twitter cards etc.
-    };
+      openGraph: {
+        title: post.title,
+        description: post.metaDescription || post.excerpt,
+        url: `https://goodhealthstore.cc/blog/${post.slug}`, // ใส่ URL เต็ม
+        siteName: 'Good Health Store',
+        images: [
+          {
+            url: `https://goodhealthstore.cc${post.imageUrl}`, // ใส่ URL เต็มของรูปภาพ
+            width: 800, // ระบุขนาด (ถ้าทราบ)
+            height: 450,
+            alt: post.title,
+          },
+        ],
+        locale: 'th_TH', // ระบุภาษา
+        type: 'article', // ประเภทเนื้อหา
+        publishedTime: post.publishedDate,
+        authors: [post.author],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: post.title,
+        description: post.metaDescription || post.excerpt,
+        // site: '@YourTwitterHandle', // ใส่ Twitter Handle (ถ้ามี)
+        // creator: '@AuthorTwitterHandle', // ใส่ Twitter Handle ผู้เขียน (ถ้ามี)
+        images: [`https://goodhealthstore.cc${post.imageUrl}`], // ใส่ URL เต็ม
+      },
+    }
   } catch (error) {
     // Handle case where post is not found during metadata generation
     return { title: 'Article Not Found' };

@@ -121,7 +121,7 @@ const CategoryCarousel = () => {
         <div className='flex flex-wrap justify-between items-center mb-8'>
           {' '}
           {/* section-header */}
-          <h2 className='text-3xl font-bold text-dark'>Category</h2>{' '}
+          <h2 className='text-3xl font-bold text-dark'>หมวดหมู่สินค้า</h2>{' '}
           {/* section-title */}
           <div className='flex items-center gap-2'>
             {' '}
@@ -130,7 +130,7 @@ const CategoryCarousel = () => {
               href='/categories'
               className='btn btn-primary bg-primary text-white hover:bg-orange-500 px-4 py-2 rounded text-sm font-semibold transition-colors duration-300'
             >
-              View All
+              แสดงทั้งหมด
             </Link>
             {/* Swiper Navigation Buttons */}
             <div className='swiper-buttons flex gap-1'>

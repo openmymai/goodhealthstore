@@ -24,12 +24,12 @@ export default async function Index() {
           <div className='flex items-center justify-between my-4 mb-8'>
             {' '}
             {/* Increased bottom margin */}
-            <h2 className='text-3xl font-bold text-dark'>Our Recent Blog</h2>
+            <h2 className='text-3xl font-bold text-dark'>บทความสุขภาพและไลฟ์สไตล์</h2>
             <Link
               href='/blog'
               className='bg-primary text-white hover:bg-orange-500 px-5 py-2 rounded text-sm font-semibold transition-colors duration-300'
             >
-              View All
+              แสดงทั้งหมด
             </Link>
           </div>
           {/* Blog Grid */}
@@ -44,7 +44,7 @@ export default async function Index() {
             </div>
           ) : (
             <div className='text-center py-5 text-body'>
-              No recent blog posts found.
+              ไม่มีบทความในขณะนี้
             </div>
           )}
         </div>

@@ -2,6 +2,7 @@ import SvgDefinitions from '@/app/_components/SvgDefinitions';
 import ClientLayout from '@/app/_components/ClientLayout';
 import Header from '@/app/_components/header';
 import Footer from '@/app/_components/footer';
+import Script from 'next/script';
 import type { Metadata } from 'next';
 import { Noto_Sans_Thai, Prompt } from 'next/font/google';
 import { StoreProvider } from './context/StoreContext';
@@ -30,6 +31,8 @@ export const metadata: Metadata = {
     'อ่านบทความล่าสุดเกี่ยวกับสุขภาพ โภชนาการ การออกกำลังกาย ไลฟ์สไตล์ออร์แกนิก และเคล็ดลับดูแลตัวเองง่ายๆ จาก Good Health Store',
 };
 
+const GTM_ID = 'GTM-5QXWKCDG';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,6 +44,15 @@ export default function RootLayout({
       className={`${noto.variable} ${prompt.variable}`}
     >
       <head>
+        <Script id="google-tag-manager-head" strategy="afterInteractive">
+          {`
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','${GTM_ID}');
+          `}
+        </Script>
         <link
           rel='apple-touch-icon'
           sizes='180x180'
@@ -90,6 +102,14 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          ></iframe>
+        </noscript>
         <SvgDefinitions />
         <StoreProvider>
           <ClientLayout>

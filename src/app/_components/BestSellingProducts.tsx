@@ -16,7 +16,7 @@ const BestSellingProducts = () => {
       <div className='container mx-auto px-4 lg:px-8'>
         <div className='section-header flex flex-wrap justify-between my-4'>
           <h2 className='text-3xl font-bold text-dark'>
-            Best selling products
+            สินค้าขายดี
           </h2>
           {/* ... View All button ... */}
         </div>

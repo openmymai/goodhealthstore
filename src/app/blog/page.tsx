@@ -7,7 +7,7 @@ import { getAllPostsSorted } from '@/lib/posts' // Import function ใหม่
 import BlogCard from '@/app/_components/BlogCard'; // Adjust path
 
 export const metadata: Metadata = {
-  title: 'บทความสุขภาพ | Organic Store',
+  title: 'บทความสุขภาพ | Good Health Store',
   description: 'อ่านบทความล่าสุดเกี่ยวกับสุขภาพ อาหารออร์แกนิก และเคล็ดลับดีๆ จาก Organic Store',
 };
 
