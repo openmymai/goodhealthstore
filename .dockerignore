@@ -15,7 +15,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Optional: Environment variables (should be passed at runtime)
-.env*
+!.env*
 !.env.example
 
 # Optional: OS generated files

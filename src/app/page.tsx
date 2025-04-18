@@ -11,7 +11,7 @@ export default async function Index() {
   return (
     <main>
       <Hero />
-      <CategoryCarousel />
+
       <BestSellingProducts />
       <section
         id='latest-blog'

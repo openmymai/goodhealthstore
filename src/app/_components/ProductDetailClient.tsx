@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/app/context/StoreContext';
 import type { Product } from '@/types/product';
+import { formatCurrency } from '@/lib/formatting';
 
 // Helper Function for Stars (can be moved to a utils file)
 const renderStars = (rating: number) => {
@@ -110,11 +111,11 @@ const ProductDetailClient: React.FC<ProductDetailClientProps> = ({
         </div>
         <div className='flex items-baseline gap-3 mb-5'>
           <span className='text-3xl font-bold text-primary'>
-            ${product.discountedPrice.toFixed(2)}
+            {formatCurrency(product.discountedPrice)}
           </span>
           {product.originalPrice && (
             <del className='text-xl text-body'>
-              ${product.originalPrice.toFixed(2)}
+              {formatCurrency(product.originalPrice)}
             </del>
           )}
           {discount > 0 && (

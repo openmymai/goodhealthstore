@@ -12,6 +12,7 @@ interface BlogCardProps {
 const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
   // Format วันที่ให้อ่านง่าย
   const formattedDate = format(new Date(post.publishedDate), 'dd MMM yyyy'); // เช่น 26 Jul 2024
+  const categorySlug = post.category.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <article className='group flex flex-col bg-white rounded-lg shadow-custom-light hover:shadow-custom-hover transition-shadow duration-300 overflow-hidden h-full'>
@@ -50,8 +51,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
               <use xlinkHref='#category'></use>
             </svg>
             {/* Optional: Link to category page */}
-            {/* <Link href={`/blog/category/${post.category.toLowerCase()}`} className="hover:text-primary">{post.category}</Link> */}
-            {post.category}
+            <Link href={`/blog/category/${categorySlug}`} className="hover:text-primary">{post.category}</Link>
           </span>
         </div>
 

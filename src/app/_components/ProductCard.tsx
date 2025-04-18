@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useStore } from '@/app/context/StoreContext'; // Import useStore
 import type { Product } from '@/types/product'; // Import Product type
-// Icon imports are removed as we use <use>
+import { formatCurrency } from '@/lib/formatting';
 
 interface ProductCardProps {
   product: Product;
@@ -73,7 +73,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </Link>
       </figure>
       <div className='flex flex-col text-center px-4 pb-4'>
-        <h3 className='text-base font-normal text-dark mb-2 h-10 v-10 line-clamp-2'>
+        <h3 className='text-base font-normal text-dark mb-2 h-13 line-clamp-2'>
           <Link
             href={productUrl}
             className='hover:text-primary transition-colors'
@@ -81,7 +81,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product.title}
           </Link>
         </h3>
-        <div className='mb-2'>
+        <div className='mt-1 mb-2'>
           <span className='rating inline-flex items-center'>
             {renderStars(product.rating)}
           </span>
@@ -90,11 +90,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className='flex justify-center items-center gap-2 mb-3'>
           {product.originalPrice && (
             <del className='text-body text-sm'>
-              ${product.originalPrice.toFixed(2)}
+              {formatCurrency(product.originalPrice)}
             </del>
           )}
           <span className='text-dark font-semibold'>
-            ${product.discountedPrice.toFixed(2)}
+            {formatCurrency(product.discountedPrice)}
           </span>
           {discount > 0 && (
             <span className='badge border border-border-subtle rounded-none font-normal px-1 text-7 text-body'>

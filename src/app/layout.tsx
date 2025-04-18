@@ -5,6 +5,7 @@ import Footer from '@/app/_components/footer';
 import Script from 'next/script';
 import type { Metadata } from 'next';
 import { Noto_Sans_Thai, Prompt } from 'next/font/google';
+import SessionProviderWrapper from '@/app/_components/SessionProviderWrapper';
 import { StoreProvider } from './context/StoreContext';
 
 import './globals.css';
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
 };
 
 const GTM_ID = 'GTM-5QXWKCDG';
+const GA4_MEASUREMENT_ID = 'G-HRYXPLN7FD';
 
 export default function RootLayout({
   children,
@@ -52,6 +54,22 @@ export default function RootLayout({
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','${GTM_ID}');
           `}
+        </Script>
+        <Script>
+          {
+            `async src="https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}"`
+          }
+        </Script>
+        <Script>
+          {
+            `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', ${GA4_MEASUREMENT_ID});
+            `
+          }
         </Script>
         <link
           rel='apple-touch-icon'
@@ -112,13 +130,15 @@ export default function RootLayout({
         </noscript>
         <SvgDefinitions />
         <StoreProvider>
-          <ClientLayout>
-            <Header />
-            <main>
-              <div className='min-h-screen'>{children}</div>
-            </main>
-            <Footer />
-          </ClientLayout>
+          <SessionProviderWrapper>
+            <ClientLayout>
+              <Header />
+              <main>
+                <div>{children}</div>
+              </main>
+              <Footer />
+            </ClientLayout>
+          </SessionProviderWrapper>
         </StoreProvider>
       </body>
     </html>

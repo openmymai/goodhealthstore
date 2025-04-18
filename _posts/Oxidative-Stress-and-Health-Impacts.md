@@ -1,7 +1,7 @@
 ---
 title: 'อนุมูลอิสระทำลายสุขภาพได้อย่างไร'
 slug: 'Oxidative-Stress-and-Health-Impacts'
-imageUrl: '/images/blog/Oxidative Stress and Health Impacts.jpg'
+imageUrl: '/images/blog/Oxidative-Stress-and-Health-Impacts.jpg'
 excerpt: 'บทนำ ความเครียดออกซิเดชัน (Oxidative stress) เป็นภาวะที่ร่างกายไม่สามารถจัดการกับอนุมูลอิสระได้ ส่งผลให้เกิดความเสียหายต่อเซลล์และเนื้อเยื่อต่างๆ ในร่างกาย ซ...'
 author: 'ทีมงาน Good Health Store'
 publishedDate: '2025-04-17'

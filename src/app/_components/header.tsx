@@ -5,6 +5,7 @@ import React, { useState, useRef } from 'react'; // Import useState and useRef
 import Link from 'next/link';
 import Image from 'next/image';
 import { useStore } from '@/app/context/StoreContext';
+import { useRouter } from 'next/navigation';
 // No individual icon imports needed here anymore
 
 // Define props if they are passed from ClientLayout
@@ -18,6 +19,8 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
   const { toggleCart, wishlistCount, cartCount } = useStore();
   const [isPagesDropdownOpen, setIsPagesDropdownOpen] = useState(false); // State for dropdown visibility
   const hideTimerRef = useRef<NodeJS.Timeout | null>(null); // Ref to store the timeout ID
+  const router = useRouter(); // Initialize router
+  const [localSearchTerm, setLocalSearchTerm] = useState(''); // State for search input
 
   // Function to clear the hide timer
   const clearHideTimer = () => {
@@ -44,6 +47,13 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
   // Event handler when mouse leaves the trigger area (li or ul)
   const handleMouseLeave = () => {
     startHideTimer(); // Start the countdown to hide
+  };
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); // Prevent default form submission
+    if (localSearchTerm.trim()) {
+      router.push(`/search?q=${encodeURIComponent(localSearchTerm.trim())}`); // Navigate to search page
+    }
   };
 
   return (
@@ -82,26 +92,17 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
           {/* Search Bar */}
           <div className='w-full sm:w-2/3 lg:w-1/3 order-3 sm:order-2 mt-3 sm:mt-0 px-4'>
             <div className='search-bar flex bg-light p-2 rounded-full'>
-              <div className='hidden md:block w-1/3'>
-                <select className='form-select w-full border-0 bg-transparent focus:ring-0 focus:outline-none text-sm text-body'>
-                  <option>All Categories</option>
-                  <option>Groceries</option>
-                  <option>Drinks</option>
-                  <option>Chocolates</option>
-                </select>
-              </div>
               <div className='flex-grow px-2'>
-                <form
-                  id='search-form'
-                  action='/'
-                  method='post'
-                  className='w-full'
-                >
-                  <input
-                    type='text'
-                    className='form-control w-full border-0 bg-transparent focus:ring-0 focus:outline-none text-sm placeholder-body'
-                    placeholder='Search for products...'
-                  />
+                <form onSubmit={handleSearchSubmit} className="search-bar flex bg-light p-2 rounded-full">
+                <input
+                  type="search" // Use type="search"
+                  name="q" // Optional: name attribute
+                  value={localSearchTerm}
+                  onChange={(e) => setLocalSearchTerm(e.target.value)}
+                  className="form-control w-full border-0 bg-transparent focus:ring-0 focus:outline-none text-sm placeholder-body"
+                  placeholder="ค้นหาสินค้าและบทความ..."
+                  aria-label="Search"
+                />
                 </form>
               </div>
               <div className='flex-shrink-0 pr-1 flex items-center'>
@@ -123,7 +124,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
                   href='/'
                   className='nav-link hover:text-primary'
                 >
-                  Home
+                  หน้าแรก
                 </Link>
               </li>
               {/* --- Pages Dropdown --- */}
@@ -138,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ toggleMenu }) => {
                   aria-expanded={isPagesDropdownOpen}
                   // No onClick needed if hover-triggered
                 >
-                  Pages
+                  เรื่องน่ารู้
                   <svg
                     className='w-4 h-4 ml-1 fill-current'
                     viewBox='0 0 20 20'

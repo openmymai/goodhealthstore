@@ -32,7 +32,7 @@ const Hero = () => {
             </p>
             <div className='flex flex-wrap gap-3 mb-12'>
               <Link
-                href='#'
+                href='/products'
                 className='btn btn-primary text-white bg-primary hover:bg-orange-500 transition-colors duration-300 uppercase text-sm font-semibold rounded-full px-6 py-3 mt-3'
               >
                 ช้อปเลย

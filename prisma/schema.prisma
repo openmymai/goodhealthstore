@@ -1,0 +1,174 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // อ่านจาก .env
+}
+
+// --- Authentication Models (NextAuth.js) ---
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String? // สำหรับ Credentials Provider
+  accounts      Account[]
+  sessions      Session[]
+  addresses     Address[] // Relation to Address
+  orders        Order[] // Relation to Order
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// --- Application Models ---
+
+model Address {
+  id         String   @id @default(cuid())
+  userId     String // Foreign key to User
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type       String // e.g., "shipping", "billing"
+  firstName  String?
+  lastName   String?
+  company    String?
+  address1   String
+  address2   String?
+  city       String
+  province   String? // หรือ State
+  postalCode String
+  country    String // e.g., "TH"
+  phone      String?
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Product {
+  // ถ้าต้องการเก็บ Product ใน DB ด้วย (Optional)
+  id              String   @id @default(cuid()) // ใช้ String CUID
+  slug            String   @unique
+  title           String
+  imageUrl        String
+  excerpt         String   @db.Text
+  contentHtml     String   @db.Text // เก็บ HTML ที่แปลงแล้ว
+  author          String
+  publishedDate   DateTime // ใช้ DateTime
+  category        String
+  tags            String[] @default([])
+  metaTitle       String?
+  metaDescription String?
+
+  originalPrice   Float?
+  discountedPrice Float // ราคาขาย
+  rating          Float? @default(0)
+  reviews         Int?   @default(0)
+
+  // Relation to OrderItem
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([category])
+}
+
+model Order {
+  id          String @id @default(cuid())
+  orderNumber String @unique @default(cuid()) // หรือสร้างเลข Order เอง
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
+  status      String // e.g., "pending", "processing", "shipped", "delivered", "cancelled"
+  totalAmount Float
+  currency    String @default("THB")
+
+  // Shipping Address Snapshot (เก็บข้อมูลที่อยู่ ณ ตอนสั่งซื้อ)
+  shippingFirstName  String?
+  shippingLastName   String?
+  shippingCompany    String?
+  shippingAddress1   String
+  shippingAddress2   String?
+  shippingCity       String
+  shippingProvince   String?
+  shippingPostalCode String
+  shippingCountry    String
+  shippingPhone      String?
+
+  // Billing Address Snapshot (Optional)
+  // ... billing fields ...
+
+  paymentMethod   String? // e.g., "stripe", "promptpay"
+  paymentIntentId String? @unique // ID จาก Payment Gateway
+  paymentStatus   String? // e.g., "paid", "unpaid", "refunded"
+
+  items OrderItem[] // Relation to OrderItem
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+model OrderItem {
+  id      String @id @default(cuid())
+  orderId String
+  order   Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  // Product Snapshot (เก็บข้อมูลสินค้า ณ ตอนสั่งซื้อ)
+  productId       String? // อาจจะเป็น null ถ้าสินค้าถูกลบไปแล้ว แต่ยังเก็บข้อมูลไว้
+  productSlug     String
+  productTitle    String
+  productImageUrl String
+  product         Product? @relation(fields: [productId], references: [id], onDelete: SetNull) // Relation (Optional)
+
+  quantity Int
+  price    Float // ราคาต่อหน่วย ณ ตอนสั่งซื้อ
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orderId])
+  @@index([productId])
+}

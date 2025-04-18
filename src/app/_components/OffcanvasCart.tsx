@@ -2,6 +2,7 @@
 'use client';
 import React from 'react';
 import { useStore } from '@/app/context/StoreContext'; // Import useStore
+import { formatCurrency } from '@/lib/formatting';
 
 // Remove props interface (isOpen, onClose are now from context)
 
@@ -115,7 +116,7 @@ const OffcanvasCart: React.FC<OffcanvasCartProps> = ({ isOpen, onClose }) => {
                           {item.title}
                         </h6>
                         <small className='text-body text-xs'>
-                          ${item.discountedPrice.toFixed(2)}
+                          {formatCurrency(item.discountedPrice)}
                         </small>
                         {/* Quantity Input */}
                         <div className='mt-1'>
@@ -146,7 +147,7 @@ const OffcanvasCart: React.FC<OffcanvasCartProps> = ({ isOpen, onClose }) => {
                   {/* Total Row */}
                   <li className='flex justify-between items-center pt-3 font-semibold text-dark'>
                     <span>Subtotal</span>
-                    <strong>${cartTotal.toFixed(2)}</strong>
+                    <strong>{formatCurrency(cartTotal)}</strong>
                   </li>
                 </ul>
               </div>
