@@ -2,7 +2,7 @@
 title: 'สารต้านอนุมูลอิสระ มีอะไรบ้าง? คู่มือฉบับเริ่มต้น ดูแลสุขภาพง่ายๆ' 
 slug: 'antioxidant-guide-for-beginners-easy-health'
 imageUrl: '/images/blog/antioxidant-guide-for-beginners-easy-health.jpg'
-excerpt: 'บทความ SEO: สารต้านอนุมูลอิสระ มีอะไรบ้าง? (สำหรับผู้เริ่มต้นดูแลสุขภาพและคนทำงานออฟฟิศ)  1. บทนำ (Introduction): สารต้านอนุมูลอิสระ: เกราะป้องกันสุขภา...' 
+excerpt: 'สารต้านอนุมูลอิสระ มีอะไรบ้าง? (สำหรับผู้เริ่มต้นดูแลสุขภาพและคนทำงานออฟฟิศ)  1. บทนำ (Introduction): สารต้านอนุมูลอิสระ: เกราะป้องกันสุขภา...' 
 author: 'ทีมงาน Good Health Store'
 publishedDate: '2025-04-17'
 category: 'Nutrition & Diet'

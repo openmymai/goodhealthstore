@@ -2,7 +2,7 @@
 title: 'Protandim และ 6-Gingerol: สารที่มีศักยภาพในการป้องกันโรคข้อเสื่อม'
 slug: 'Protandim-and-6-Gingerol-Preventing-Osteoarthritis'
 imageUrl: '/images/blog/Protandim-and-6-Gingerol-Preventing-Osteoarthritis.jpg'
-excerpt: '## Elucidating the Role of Protandim and 6-Gingerol in Protection Against Osteoarthritis  โรคข้อเสื่อม (Osteoarthritis) เป็นหนึ่งในปัญหาสุขภาพที่พบได้บ่อยและส่ง...'
+excerpt: 'Elucidating the Role of Protandim and 6-Gingerol in Protection Against Osteoarthritis  โรคข้อเสื่อม (Osteoarthritis) เป็นหนึ่งในปัญหาสุขภาพที่พบได้บ่อยและส่ง...'
 author: 'ทีมงาน Good Health Store'
 publishedDate: '2025-04-17'
 category: 'Nutrition & Diet'

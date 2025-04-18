@@ -2,7 +2,7 @@
 title: 'Nrf2 & SOD: กู้ผิวใส ลดเหนื่อยล้า ด้วยคู่หูต้านอนุมูลอิสระ!'
 slug: 'nrf2-sod-antioxidant-anti-aging-benefits'
 imageUrl: '/images/blog/nrf2-sod-antioxidant-anti-aging-benefits.jpg'
-excerpt: '## Nrf2 และ Superoxide Dismutase (SOD): คู่หูดูแลสุขภาพที่คุณอาจไม่เคยรู้จัก  คุณรู้สึกเหนื่อยง่าย อ่อนเพลีย หรือสังเกตเห็นริ้วรอยก่อนวัยบนใบหน้าบ้างไหม? ปัญหาเ...'
+excerpt: 'Nrf2 และ Superoxide Dismutase (SOD): คู่หูดูแลสุขภาพที่คุณอาจไม่เคยรู้จัก  คุณรู้สึกเหนื่อยง่าย อ่อนเพลีย หรือสังเกตเห็นริ้วรอยก่อนวัยบนใบหน้าบ้างไหม? ปัญหาเ...'
 author: 'ทีมงาน Good Health Store'
 publishedDate: '2025-04-17'
 category: 'Nutrition & Diet'

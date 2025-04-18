@@ -2,7 +2,7 @@
 title: 'การกระตุ้น NRF2: กลยุทธ์ใหม่ในการลดความเสี่ยงโรคหลอดเลือด'
 slug: 'NRF2-Activation-A-Novel-Strategy-for-Vascular-Disease-Prevention'
 imageUrl: '/images/blog/NRF2-Activation-A-Novel-Strategy-for-Vascular-Disease-Prevention.jpg'
-excerpt: '## บทนำ การกระตุ้น NRF2 ด้วย Protandim เป็นกลยุทธ์ที่มีศักยภาพในการลดความเสี่ยงต่อการเกิดโรคหลอดเลือดและการเสื่อมสภาพของหลอดเลือดขนาดเล็กที่เกิดจากเกลือ การดูแล...'
+excerpt: 'บทนำ การกระตุ้น NRF2 ด้วย Protandim เป็นกลยุทธ์ที่มีศักยภาพในการลดความเสี่ยงต่อการเกิดโรคหลอดเลือดและการเสื่อมสภาพของหลอดเลือดขนาดเล็กที่เกิดจากเกลือ การดูแล...'
 author: 'ทีมงาน Good Health Store'
 publishedDate: '2025-04-17'
 category: 'Nutrition & Diet'

@@ -35,7 +35,7 @@ const Footer = () => {
                   <ul className='flex list-none gap-2'>
                     <li>
                       <a
-                        href='#'
+                        href='https://www.facebook.com/profile.php?id=61574967647831'
                         aria-label='Facebook'
                         className='p-2 border border-gray-600 hover:bg-light hover:text-secondary rounded-md inline-block transition-colors duration-200'
                       >

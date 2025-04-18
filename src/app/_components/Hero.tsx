@@ -6,10 +6,20 @@ import Link from 'next/link';
 
 const Hero = () => {
   return (
-    <section
-      className='bg-cover bg-no-repeat bg-center relative'
-      style={{ backgroundImage: "url('/images/banner-1.jpg')" }}
-    >
+    <section className='relative overflow-hidden min-h-[70vh] md:min-h-[80vh] flex items-center'> {/* กำหนด min-height และ flex */}
+
+      {/* Image Component สำหรับ Background */}
+      <Image
+        src="/images/banner-1.jpg" // Path รูปภาพของคุณ
+        alt="Organic Groceries Banner" // ใส่ Alt Text ที่สื่อความหมาย
+        fill // ทำให้รูปภาพเต็มพื้นที่ parent (ต้องมี parent ที่เป็น relative, absolute, fixed, sticky)
+        style={{ objectFit: 'cover' }} // ให้รูปภาพ cover พื้นที่โดยไม่เสียสัดส่วน (เหมือน background-size: cover)
+        quality={85} // กำหนดคุณภาพ (0-100, default 75) ลองปรับค่านี้ดู
+        priority // บอกให้โหลดรูปนี้ก่อน (สำคัญสำหรับ Hero Banner)
+        className="-z-10" // ใช้ z-index ติดลบเพื่อส่งไปอยู่หลังสุด
+        // Optional: Sizes attribute for responsive optimization
+        // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
       <div className='container mx-auto px-4 lg:px-8'>
         <div className='flex flex-wrap'>
           <div className='w-full lg:w-1/2 pt-20 mt-10'>
@@ -70,98 +80,6 @@ const Hero = () => {
           </div>
           {/* Optional: Add the image part if needed */}
           {/* <div className="w-full lg:w-1/2"></div> */}
-        </div>
-      </div>
-
-      {/* Feature Cards - Placed outside the main container for full width effect */}
-      <div className='relative -bottom-16 md:-bottom-12 lg:-bottom-1'>
-        <div className='container mx-auto px-0'>
-          <div className='grid grid-cols-1 sm:grid-cols-3'>
-            {/* Card 1 */}
-            <div className='bg-primary p-4 text-white'>
-              <div className='flex flex-col md:flex-row items-center'>
-                <div className='w-full md:w-1/4 text-center mb-3 md:mb-0'>
-                  {/* Use SVG with <use> */}
-                  <svg
-                    className='w-12 h-12 md:w-16 md:h-16 mx-auto'
-                    aria-hidden='true'
-                  >
-                    <use xlinkHref='#fresh'></use>
-                  </svg>
-                </div>
-                <div className='w-full md:w-3/4 text-center md:text-left'>
-                  <div className='p-0'>
-                    {' '}
-                    {/* Removed card-body class */}
-                    <h5 className='text-white font-semibold text-lg mb-1'>
-                      คุณภาพสดใหม่
-                    </h5>
-                    <p className='text-sm opacity-90'>
-                      {' '}
-                      {/* Removed card-text class */}
-                      เลือกสรรค์วัตถุดิบที่สดใหม่และมีคุณภาพสูงสุด
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Card 2 */}
-            <div className='bg-secondary p-4 text-white'>
-              <div className='flex flex-col md:flex-row items-center'>
-                <div className='w-full md:w-1/4 text-center mb-3 md:mb-0'>
-                  {/* Use SVG with <use> */}
-                  <svg
-                    className='w-12 h-12 md:w-16 md:h-16 mx-auto'
-                    aria-hidden='true'
-                  >
-                    <use xlinkHref='#organic'></use>
-                  </svg>
-                </div>
-                <div className='w-full md:w-3/4 text-center md:text-left'>
-                  <div className='p-0'>
-                    {' '}
-                    {/* Removed card-body class */}
-                    <h5 className='text-white font-semibold text-lg mb-1'>
-                      100% จากธรรมชาติ
-                    </h5>
-                    <p className='text-sm opacity-90'>
-                      {' '}
-                      {/* Removed card-text class */}
-                      เลือกสรรค์วัตถุดิบที่ดีที่สุดจากธรรมชาติ
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Card 3 */}
-            <div className='bg-danger p-4 text-white'>
-              <div className='flex flex-col md:flex-row items-center'>
-                <div className='w-full md:w-1/4 text-center mb-3 md:mb-0'>
-                  {/* Use SVG with <use> */}
-                  <svg
-                    className='w-12 h-12 md:w-16 md:h-16 mx-auto'
-                    aria-hidden='true'
-                  >
-                    <use xlinkHref='#delivery'></use>
-                  </svg>
-                </div>
-                <div className='w-full md:w-3/4 text-center md:text-left'>
-                  <div className='p-0'>
-                    {' '}
-                    {/* Removed card-body class */}
-                    <h5 className='text-white font-semibold text-lg mb-1'>
-                      จัดส่งฉับไว
-                    </h5>
-                    <p className='text-sm opacity-90'>
-                      {' '}
-                      {/* Removed card-text class */}
-                      บริการจัดส่งที่รวดเร็วและปลอดภัย
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
