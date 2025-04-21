@@ -1,103 +1,163 @@
-import Image from "next/image";
+// import Image from 'next/image';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    // เริ่มสร้างโครงสร้าง section ต่างๆ ตาม index.html โดยใช้ Tailwind
+    <>
+      {/* Section 1: Hero Banner */}
+      <section
+        className='bg-cover bg-no-repeat pt-20' // Tailwind classes for background
+        style={{ backgroundImage: "url('/images/banner-1.jpg')" }} // Inline style for background image path
+      >
+        <div className='container-lg mx-auto px-4'>
+          <div className='grid grid-cols-1 lg:grid-cols-2'>
+            <div className='pt-10 mt-5'>
+              <h2 className='text-6xl md:text-7xl lg:text-8xl leading-tight ls-1'>
+                {' '}
+                {/* Responsive text size */}
+                <span className='font-bold text-primary'>Organic</span> Foods at
+                your <span className='font-bold text-gray-800'>Doorsteps</span>
+              </h2>
+              <p className='text-xl text-gray-600 mt-4'>
+                Dignissim massa diam elementum.
+              </p>
+              <div className='flex flex-col sm:flex-row gap-3 mt-6'>
+                <a
+                  href='#'
+                  className='btn btn-primary bg-primary hover:bg-green-700 text-white uppercase text-sm rounded-full px-6 py-3'
+                >
+                  Start Shopping
+                </a>
+                <a
+                  href='#'
+                  className='btn btn-dark bg-secondary hover:bg-gray-800 text-white uppercase text-sm rounded-full px-6 py-3'
+                >
+                  Join Now
+                </a>
+              </div>
+              {/* Stats Section */}
+              <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 my-12 text-gray-800'>
+                <div className='flex items-center'>
+                  <p className='text-4xl lg:text-5xl font-bold leading-none mr-2'>
+                    14k+
+                  </p>
+                  <p className='text-xs uppercase leading-tight'>
+                    Product Varieties
+                  </p>
+                </div>
+                <div className='flex items-center'>
+                  <p className='text-4xl lg:text-5xl font-bold leading-none mr-2'>
+                    50k+
+                  </p>
+                  <p className='text-xs uppercase leading-tight'>
+                    Happy Customers
+                  </p>
+                </div>
+                <div className='flex items-center'>
+                  <p className='text-4xl lg:text-5xl font-bold leading-none mr-2'>
+                    10+
+                  </p>
+                  <p className='text-xs uppercase leading-tight'>
+                    Store Locations
+                  </p>
+                </div>
+              </div>
+            </div>
+            {/* Optional: Add the other column if needed */}
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Feature Cards Section */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 -mx-0 lg:-mb-1'>
+            {' '}
+            {/* Negative margin for overlap effect */}
+            <div className='bg-primary text-white p-4 '>
+              <div className='flex items-center'>
+                <div className='w-1/4 text-center'>
+                  <svg
+                    width='60'
+                    height='60'
+                  >
+                    <use xlinkHref='#fresh'></use>
+                  </svg>
+                </div>
+                <div className='w-3/4 pl-3'>
+                  <h5 className='font-semibold text-lg'>Fresh from farm</h5>
+                  <p className='text-sm font-light'>
+                    Lorem ipsum dolor sit amet, consectetur adipi elit.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className='bg-secondary text-white p-4'>
+              <div className='flex items-center'>
+                <div className='w-1/4 text-center'>
+                  <svg
+                    width='60'
+                    height='60'
+                  >
+                    <use xlinkHref='#organic'></use>
+                  </svg>
+                </div>
+                <div className='w-3/4 pl-3'>
+                  <h5 className='font-semibold text-lg'>100% Organic</h5>
+                  <p className='text-sm font-light'>
+                    Lorem ipsum dolor sit amet, consectetur adipi elit.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className='bg-danger text-white p-4'>
+              <div className='flex items-center'>
+                <div className='w-1/4 text-center'>
+                  <svg
+                    width='60'
+                    height='60'
+                  >
+                    <use xlinkHref='#delivery'></use>
+                  </svg>
+                </div>
+                <div className='w-3/4 pl-3'>
+                  <h5 className='font-semibold text-lg'>Free delivery</h5>
+                  <p className='text-sm font-light'>
+                    Lorem ipsum dolor sit amet, consectetur adipi elit.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* --- เพิ่ม Section อื่นๆ ต่อจากนี้ --- */}
+      {/* Section 2: Category Carousel (สร้าง Component แยก) */}
+      {/* <CategoryCarousel /> */}
+
+      {/* Section 3: Best Selling Products (สร้าง Component แยก) */}
+      {/* <ProductGrid title="Best selling products" /> */}
+
+      {/* Section 4: Banner Blocks (สร้าง Component แยก) */}
+      {/* <BannerAdSection /> */}
+
+      {/* Section 5: Featured Products (สร้าง Component แยก) */}
+      {/* <ProductCarousel title="Featured products" /> */}
+
+      {/* Section 6: Newsletter Signup (สร้าง Component แยก) */}
+      {/* <NewsletterSignup /> */}
+
+      {/* Section 7: Popular Products (สร้าง Component แยก) */}
+      {/* <ProductCarousel title="Most popular products" /> */}
+
+      {/* Section 8: Latest Blog (สร้าง Component แยก) */}
+      {/* <LatestBlog /> */}
+
+      {/* Section 9: Download App (สร้าง Component แยก) */}
+      {/* <DownloadApp /> */}
+
+      {/* Section 10: People are looking for (สร้าง Component แยก) */}
+      {/* <PopularSearches /> */}
+
+      {/* Section 11: Features/Info cards (สร้าง Component แยก) */}
+      {/* <FeatureInfoSection /> */}
+    </>
   );
 }

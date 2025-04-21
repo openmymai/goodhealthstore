@@ -1,26 +1,131 @@
-@import "tailwindcss";
+/* src/app/globals.css */
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* 1. Tailwind Directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 2. Base Layer Styles */
+@layer base {
+  /* Apply heading font configured in tailwind.config.ts */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: theme('fontFamily.heading');
+    font-weight: 700; /* Default heading weight */
+    color: theme(
+      'colors.secondary'
+    ); /* Default heading color (adjust as needed) */
+    /* letter-spacing: 0.03em; Remove if heading font handles spacing */
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Body will use Noto Sans Thai (font-sans) from layout.tsx and tailwind.config.ts */
+  body {
+    color: #747474; /* Default body color from style.css */
+    letter-spacing: 0.03em; /* Spacing from style.css */
+    @apply antialiased; /* Improve font rendering */
+  }
+
+  /* Base Link Styles (optional, adjust as needed) */
+  a {
+    @apply text-gray-700 transition-colors duration-200 ease-in-out; /* Slightly darker than body */
+    text-decoration: none; /* Remove underline by default */
+  }
+  a:hover {
+    @apply text-primary; /* Use primary color on hover */
+  }
+
+  /* Ensure images are responsive by default */
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: block;
+    vertical-align: middle;
+  }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 3. Component Layer Styles (Example - Preloader) */
+@layer components {
+  .preloader-wrapper {
+    @apply w-full h-screen fixed top-0 left-0 z-[111] bg-white flex items-center justify-center;
+    margin: 0 auto; /* Keep this for centering the inner preloader vertically */
+  }
+
+  /* Adjusted preloader to work better with flex centering */
+  .preloader {
+    @apply relative; /* Needed for ::before and ::after positioning */
+    /* Size is set by ::before/::after */
+  }
+
+  .preloader:before,
+  .preloader:after,
+  .preloader {
+    @apply rounded-full;
+    width: 2em;
+    height: 2em;
+    /* Use Tailwind's animation utility if possible, or keep keyframes */
+    animation: preloaderAnimation 1.2s infinite ease-in-out;
+  }
+  /* Position helpers if flex doesn't perfectly center */
+  /* .preloader { margin: 20% auto 0; } */
+
+  .preloader {
+    animation-delay: -0.16s;
+  }
+
+  .preloader:before,
+  .preloader:after {
+    @apply content-[''] absolute top-0;
+  }
+
+  .preloader:before {
+    left: -3.5em;
+    animation-delay: -0.32s;
+  }
+
+  .preloader:after {
+    left: 3.5em;
+  }
+
+  /* Preloader Keyframes */
+  @keyframes preloaderAnimation {
+    0%,
+    80%,
+    100% {
+      /* Use Tailwind's color utility */
+      box-shadow: 0 2em 0 -1em theme('colors.primary');
+    }
+    40% {
+      box-shadow: 0 2em 0 0 theme('colors.primary');
+    }
+  }
+}
+
+/* 4. Utility Layer Styles (Custom utilities from style.css) */
+@layer utilities {
+  .ls-1 {
+    letter-spacing: -0.04em;
+  }
+  .border-dashed {
+    border-bottom: 1px dashed #d1d1d1; /* Keep specific color or use theme('colors.gray.300') */
+  }
+
+  /* Example: Input number styling (can be refined) */
+  /* input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+     opacity: 1;
+  } */
 }
